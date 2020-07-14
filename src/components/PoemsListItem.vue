@@ -11,7 +11,16 @@
     </v-card-text>
     <v-spacer></v-spacer>
     <v-card-actions>
-      <v-btn block dark outlined class="light-blue">
+      <v-btn
+        block
+        dark
+        outlined
+        class="light-blue"
+        :to="{
+          name: 'Poem',
+          params: { id: poem.id }
+        }"
+      >
         <v-icon left>read_more</v-icon>
         <span>Read</span>
       </v-btn>

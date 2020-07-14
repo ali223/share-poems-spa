@@ -9,6 +9,12 @@ export default new Vuex.Store({
     poems: []
   },
 
+  getters: {
+    getPoemById: state => id => {
+      return state.poems.find(poem => poem.id === id);
+    }
+  },
+
   mutations: {
     setPoems(state, poems) {
       state.poems = poems;
