@@ -19,7 +19,7 @@ export default new Vuex.Store({
     fetchPoems({ commit }) {
       return new Promise((resolve, reject) => {
         axios
-          .get('http://share-poems-api.test/poems')
+          .get(`${process.env.VUE_APP_BASE_API_URL}/poems`)
           .then(response => {
             let poems = response.data.data;
             commit('setPoems', poems);
