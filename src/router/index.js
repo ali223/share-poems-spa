@@ -15,7 +15,11 @@ const routes = [
     path: '/poem/:id',
     name: 'Poem',
     component: Poem,
-    props: true
+    props: route => {
+      return {
+        id: Number(route.params.id)
+      };
+    }
   }
 ];
 
