@@ -12,7 +12,8 @@
     <v-spacer></v-spacer>
     <v-card-actions>
       <v-btn block dark outlined class="light-blue">
-        <span>View</span>
+        <v-icon left>read_more</v-icon>
+        <span>Read</span>
       </v-btn>
     </v-card-actions>
   </v-card>
