@@ -8,9 +8,27 @@
           </router-link>
         </span>
       </v-toolbar-title>
+
+      <v-progress-linear
+        :active="loading"
+        :indeterminate="loading"
+        absolute
+        bottom
+        color="yellow accent-4"
+      ></v-progress-linear>
     </v-app-bar>
   </nav>
 </template>
+
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState(['loading'])
+  }
+};
+</script>
 
 <style scoped>
 span.site-title a {

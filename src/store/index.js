@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     poems: [],
-    poem: {}
+    poem: {},
+    loading: false
   },
 
   getters: {
@@ -23,6 +24,10 @@ export default new Vuex.Store({
 
     setPoem(state, poem) {
       state.poem = poem;
+    },
+
+    setLoading(state, loading) {
+      state.loading = loading;
     }
   },
 

@@ -3,14 +3,11 @@
     <v-col cols="12" sm="6" md="4" lg="3" v-for="poem in poems" :key="poem.id">
       <poems-list-item :poem="poem" />
     </v-col>
-    <v-overlay :value="overlay">
-      <v-progress-circular indeterminate size="96"></v-progress-circular>
-    </v-overlay>
   </v-row>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import PoemsListItem from './PoemsListItem';
 
 export default {
@@ -18,22 +15,21 @@ export default {
     PoemsListItem
   },
 
-  data() {
-    return {
-      overlay: false
-    };
+  computed: {
+    ...mapState(['poems'])
   },
 
   created() {
-    this.overlay = true;
+    this.setLoading(true);
 
-    this.$store.dispatch('fetchPoems').then(() => {
-      this.overlay = false;
+    this.fetchPoems().then(() => {
+      this.setLoading(false);
     });
   },
 
-  computed: {
-    ...mapState(['poems'])
+  methods: {
+    ...mapMutations(['setLoading']),
+    ...mapActions(['fetchPoems'])
   }
 };
 </script>

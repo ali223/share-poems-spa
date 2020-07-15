@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -39,11 +39,16 @@ export default {
   },
 
   created() {
-    this.fetchPoem(this.id);
+    this.setLoading(true);
+
+    this.fetchPoem(this.id).then(() => {
+      this.setLoading(false);
+    });
   },
 
   methods: {
-    ...mapActions(['fetchPoem'])
+    ...mapActions(['fetchPoem']),
+    ...mapMutations(['setLoading'])
   }
 };
 </script>
