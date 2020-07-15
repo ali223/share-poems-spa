@@ -17,7 +17,7 @@
         outlined
         class="light-blue"
         :to="{
-          name: 'Poem',
+          name: 'PoemShow',
           params: { id: poem.id }
         }"
       >

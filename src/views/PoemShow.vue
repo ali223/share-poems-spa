@@ -3,6 +3,7 @@
     <v-container class="my-5">
       <v-card
         class="text-xs-center ma-3 rounded d-flex justify-space-between flex-column"
+        v-if="poem"
       >
         <v-img
           class="white--text align-end"
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -34,11 +35,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getPoemById']),
+    ...mapState(['poem'])
+  },
 
-    poem() {
-      return this.getPoemById(this.id);
-    }
+  created() {
+    this.fetchPoem(this.id);
+  },
+
+  methods: {
+    ...mapActions(['fetchPoem'])
   }
 };
 </script>

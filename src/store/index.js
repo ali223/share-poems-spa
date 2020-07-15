@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    poems: []
+    poems: [],
+    poem: {}
   },
 
   getters: {
@@ -18,6 +19,10 @@ export default new Vuex.Store({
   mutations: {
     setPoems(state, poems) {
       state.poems = poems;
+    },
+
+    setPoem(state, poem) {
+      state.poem = poem;
     }
   },
 
@@ -30,6 +35,32 @@ export default new Vuex.Store({
             let poems = response.data.data;
             commit('setPoems', poems);
             resolve(poems);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+
+    fetchPoem({ commit, getters, state }, id) {
+      return new Promise((resolve, reject) => {
+        if (id === state.poem.id) {
+          return resolve(state.poem);
+        }
+
+        let poem = getters.getPoemById(id);
+
+        if (poem) {
+          commit('setPoem', poem);
+          return resolve(poem);
+        }
+
+        axios
+          .get(`${process.env.VUE_APP_BASE_API_URL}/poems/${id}`)
+          .then(response => {
+            let poem = response.data.data;
+            commit('setPoem', poem);
+            resolve(poem);
           })
           .catch(error => {
             reject(error);

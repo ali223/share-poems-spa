@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
-import Poem from '@/views/Poem.vue';
+import PoemShow from '@/views/PoemShow.vue';
 
 Vue.use(VueRouter);
 
@@ -13,8 +13,8 @@ const routes = [
   },
   {
     path: '/poem/:id',
-    name: 'Poem',
-    component: Poem,
+    name: 'PoemShow',
+    component: PoemShow,
     props: route => {
       return {
         id: Number(route.params.id)
