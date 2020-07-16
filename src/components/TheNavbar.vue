@@ -9,6 +9,12 @@
         </span>
       </v-toolbar-title>
 
+      <v-spacer></v-spacer>
+
+      <v-btn text :to="{ name: 'UserRegister' }">
+        Register
+      </v-btn>
+
       <v-progress-linear
         :active="loading"
         :indeterminate="loading"

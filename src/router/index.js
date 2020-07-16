@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import PoemShow from '@/views/PoemShow.vue';
+import UserRegister from '@/views/UserRegister.vue';
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const routes = [
         id: Number(route.params.id)
       };
     }
+  },
+  {
+    path: '/user-register',
+    name: 'UserRegister',
+    component: UserRegister
   }
 ];
 

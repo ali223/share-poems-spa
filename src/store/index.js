@@ -71,6 +71,20 @@ export default new Vuex.Store({
             reject(error);
           });
       });
+    },
+
+    registerUser(context, user) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_BASE_API_URL}/user-registrations`, user)
+          .then(response => {
+            let user = response.data.data;
+            resolve(user);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     }
   },
 
