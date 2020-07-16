@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <the-navbar />
+    <the-notifications />
     <v-main>
       <router-view />
     </v-main>
@@ -9,12 +10,14 @@
 
 <script>
 import TheNavbar from '@/components/TheNavbar';
+import TheNotifications from '@/components/TheNotifications';
 
 export default {
   name: 'App',
 
   components: {
-    TheNavbar
+    TheNavbar,
+    TheNotifications
   },
 
   data: () => ({
