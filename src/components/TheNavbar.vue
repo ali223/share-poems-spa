@@ -11,9 +11,33 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text :to="{ name: 'UserRegister' }">
-        Register
-      </v-btn>
+      <template v-if="isUserLoggedIn">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text v-on="on" v-bind="attrs">
+              <v-icon left>person</v-icon>
+              <span>{{ authUser.name }}</span>
+            </v-btn>
+          </template>
+          <v-list flat>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title @click="logout">Logout</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
+
+      <template v-else>
+        <v-btn text :to="{ name: 'UserRegister' }">
+          Register
+        </v-btn>
+
+        <v-btn text :to="{ name: 'UserLogin' }">
+          Login
+        </v-btn>
+      </template>
 
       <v-progress-linear
         :active="loading"
@@ -27,11 +51,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   computed: {
-    ...mapState(['loading'])
+    ...mapState(['loading', 'authUser']),
+    ...mapGetters(['isUserLoggedIn'])
+  },
+
+  methods: {
+    ...mapActions(['logoutUser']),
+    ...mapMutations(['addNotification']),
+
+    logout() {
+      this.logoutUser().then(() => {
+        if (this.$router.currentRoute.name !== 'Home') {
+          this.$router.push({ name: 'Home' });
+        }
+
+        this.addNotification({
+          message: 'You have logged out!',
+          color: 'success'
+        });
+      });
+    }
   }
 };
 </script>

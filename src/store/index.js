@@ -11,12 +11,17 @@ export default new Vuex.Store({
     poems: [],
     poem: {},
     loading: false,
-    notifications: []
+    notifications: [],
+    authUser: null
   },
 
   getters: {
     getPoemById: state => id => {
       return state.poems.find(poem => poem.id === id);
+    },
+
+    isUserLoggedIn: state => {
+      return !!state.authUser;
     }
   },
 
@@ -44,6 +49,18 @@ export default new Vuex.Store({
       state.notifications = state.notifications.filter(
         notification => notification.id !== notificationToRemove.id
       );
+    },
+
+    setAuthUser(state, user) {
+      localStorage.setItem('authUser', JSON.stringify(user));
+      axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+      state.authUser = user;
+    },
+
+    removeAuthUser(state) {
+      localStorage.removeItem('authUser');
+      axios.defaults.headers.common['Authorization'] = '';
+      state.authUser = null;
     }
   },
 
@@ -101,8 +118,28 @@ export default new Vuex.Store({
             reject(error);
           });
       });
-    }
-  },
+    },
 
-  modules: {}
+    loginUser({ commit }, credentials) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_BASE_API_URL}/auth/login`, credentials)
+          .then(response => {
+            let user = response.data.user;
+            commit('setAuthUser', user);
+            resolve(user);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+
+    logoutUser({ commit }) {
+      return new Promise(resolve => {
+        commit('removeAuthUser');
+        resolve();
+      });
+    }
+  }
 });
