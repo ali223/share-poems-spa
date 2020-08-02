@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue';
 import PoemShow from '@/views/PoemShow.vue';
 import UserRegister from '@/views/UserRegister.vue';
 import UserLogin from '@/views/UserLogin.vue';
+import MyProfile from '@/views/MyProfile.vue';
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ const routes = [
     path: '/user-login',
     name: 'UserLogin',
     component: UserLogin
+  },
+  {
+    path: '/my-profile',
+    name: 'MyProfile',
+    component: MyProfile
   }
 ];
 

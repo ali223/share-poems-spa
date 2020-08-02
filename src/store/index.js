@@ -12,7 +12,8 @@ export default new Vuex.Store({
     poem: {},
     loading: false,
     notifications: [],
-    authUser: null
+    authUser: null,
+    authUserProfile: null
   },
 
   getters: {
@@ -61,6 +62,10 @@ export default new Vuex.Store({
       localStorage.removeItem('authUser');
       axios.defaults.headers.common['Authorization'] = '';
       state.authUser = null;
+    },
+
+    setAuthUserProfile(state, authUserProfile) {
+      state.authUserProfile = authUserProfile;
     }
   },
 
@@ -99,6 +104,21 @@ export default new Vuex.Store({
             let poem = response.data.data;
             commit('setPoem', poem);
             resolve(poem);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+
+    fetchAuthUserProfile({ commit }) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_BASE_API_URL}/my-profile`)
+          .then(response => {
+            let userProfile = response.data.data;
+            commit('setAuthUserProfile', userProfile);
+            resolve(userProfile);
           })
           .catch(error => {
             reject(error);

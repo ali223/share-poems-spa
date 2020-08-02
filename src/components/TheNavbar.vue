@@ -20,10 +20,11 @@
             </v-btn>
           </template>
           <v-list flat>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title @click="logout">Logout</v-list-item-title>
-              </v-list-item-content>
+            <v-list-item :to="{ name: 'MyProfile' }">
+              <v-list-item-title>My Profile</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="logout">
+              <v-list-item-title>Logout</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
