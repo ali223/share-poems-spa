@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import PoemService from '@/services/PoemService';
+import AuthService from '@/services/AuthService';
 
 Vue.use(Vuex);
 
@@ -112,8 +113,7 @@ export default new Vuex.Store({
 
     fetchAuthUserProfile({ commit }) {
       return new Promise((resolve, reject) => {
-        axios
-          .get(`${process.env.VUE_APP_BASE_API_URL}/my-profile`)
+        AuthService.getMyProfile()
           .then(response => {
             let userProfile = response.data.data;
             commit('setAuthUserProfile', userProfile);
@@ -127,8 +127,7 @@ export default new Vuex.Store({
 
     registerUser(context, user) {
       return new Promise((resolve, reject) => {
-        axios
-          .post(`${process.env.VUE_APP_BASE_API_URL}/user-registrations`, user)
+        AuthService.registerUser(user)
           .then(response => {
             let user = response.data.data;
             resolve(user);
@@ -141,8 +140,7 @@ export default new Vuex.Store({
 
     loginUser({ commit }, credentials) {
       return new Promise((resolve, reject) => {
-        axios
-          .post(`${process.env.VUE_APP_BASE_API_URL}/auth/login`, credentials)
+        AuthService.loginUser(credentials)
           .then(response => {
             let user = response.data.user;
             commit('setAuthUser', user);

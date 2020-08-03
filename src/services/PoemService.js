@@ -1,11 +1,11 @@
-import ApiClient from './ApiClient';
+import axios from 'axios';
 
 export default {
   getPoems() {
-    return ApiClient.get('/poems');
+    return axios.get('/poems');
   },
 
   getPoem(id) {
-    return ApiClient.get(`/poems/${id}`);
+    return axios.get(`/poems/${id}`);
   }
 };

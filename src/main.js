@@ -3,6 +3,11 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
+import axios from 'axios';
+
+axios.defaults.baseURL = `${process.env.VUE_APP_BASE_API_URL}`;
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 Vue.config.productionTip = false;
 
