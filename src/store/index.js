@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import PoemService from '@/services/PoemService';
 
 Vue.use(Vuex);
 
@@ -72,8 +73,7 @@ export default new Vuex.Store({
   actions: {
     fetchPoems({ commit }) {
       return new Promise((resolve, reject) => {
-        axios
-          .get(`${process.env.VUE_APP_BASE_API_URL}/poems`)
+        PoemService.getPoems()
           .then(response => {
             let poems = response.data.data;
             commit('setPoems', poems);
@@ -98,8 +98,7 @@ export default new Vuex.Store({
           return resolve(poem);
         }
 
-        axios
-          .get(`${process.env.VUE_APP_BASE_API_URL}/poems/${id}`)
+        PoemService.getPoem(id)
           .then(response => {
             let poem = response.data.data;
             commit('setPoem', poem);
