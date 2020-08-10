@@ -37,7 +37,8 @@ const routes = [
   {
     path: '/my-profile',
     name: 'MyProfile',
-    component: MyProfile
+    component: MyProfile,
+    meta: { requiresAuth: true }
   }
 ];
 
@@ -45,6 +46,17 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const loggedIn = localStorage.getItem('authUser');
+    if (!loggedIn) {
+      return next({ name: 'UserLogin' });
+    }
+  }
+
+  next();
 });
 
 export default router;
