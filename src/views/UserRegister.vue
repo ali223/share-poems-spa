@@ -140,7 +140,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['setLoading', 'addNotification']),
+    ...mapMutations(['addNotification']),
     ...mapActions(['registerUser']),
 
     register() {
@@ -149,11 +149,8 @@ export default {
           return;
         }
 
-        this.setLoading(true);
-
         this.registerUser(this.user)
           .then(() => {
-            this.setLoading(false);
             this.$router.push({ name: 'Home' });
             this.addNotification({
               message: 'User account created!',
@@ -164,7 +161,6 @@ export default {
             if (error.response && error.response.data) {
               this.$refs.observer.setErrors(error.response.data);
             }
-            this.setLoading(false);
           });
       });
     }

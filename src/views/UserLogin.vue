@@ -101,7 +101,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['setLoading', 'addNotification']),
+    ...mapMutations(['addNotification']),
     ...mapActions(['loginUser']),
 
     login() {
@@ -110,11 +110,8 @@ export default {
           return;
         }
 
-        this.setLoading(true);
-
         this.loginUser(this.credentials)
           .then(() => {
-            this.setLoading(false);
             const redirectPath = this.$route.query.redirect || '/';
             this.$router.push(redirectPath);
             this.addNotification({
@@ -126,7 +123,6 @@ export default {
             if (error.response && error.response.data) {
               this.$refs.observer.setErrors(error.response.data);
             }
-            this.setLoading(false);
           });
       });
     }

@@ -74,13 +74,16 @@ export default new Vuex.Store({
   actions: {
     fetchPoems({ commit }) {
       return new Promise((resolve, reject) => {
+        commit('setLoading', true);
         PoemService.getPoems()
           .then(response => {
             let poems = response.data.data;
             commit('setPoems', poems);
+            commit('setLoading', false);
             resolve(poems);
           })
           .catch(error => {
+            commit('setLoading', false);
             reject(error);
           });
       });
@@ -99,13 +102,17 @@ export default new Vuex.Store({
           return resolve(poem);
         }
 
+        commit('setLoading', true);
+
         PoemService.getPoem(id)
           .then(response => {
             let poem = response.data.data;
             commit('setPoem', poem);
+            commit('setLoading', false);
             resolve(poem);
           })
           .catch(error => {
+            commit('setLoading', false);
             reject(error);
           });
       });
@@ -113,13 +120,16 @@ export default new Vuex.Store({
 
     fetchAuthUserProfile({ commit }) {
       return new Promise((resolve, reject) => {
+        commit('setLoading', true);
         AuthService.getMyProfile()
           .then(response => {
             let userProfile = response.data.data;
             commit('setAuthUserProfile', userProfile);
+            commit('setLoading', false);
             resolve(userProfile);
           })
           .catch(error => {
+            commit('setLoading', false);
             reject(error);
           });
       });
@@ -127,13 +137,16 @@ export default new Vuex.Store({
 
     registerUser({ commit }, user) {
       return new Promise((resolve, reject) => {
+        commit('setLoading', true);
         AuthService.registerUser(user)
           .then(response => {
             let user = response.data.user;
             commit('setAuthUser', user);
+            commit('setLoading', false);
             resolve(user);
           })
           .catch(error => {
+            commit('setLoading', false);
             reject(error);
           });
       });
@@ -141,13 +154,16 @@ export default new Vuex.Store({
 
     loginUser({ commit }, credentials) {
       return new Promise((resolve, reject) => {
+        commit('setLoading', true);
         AuthService.loginUser(credentials)
           .then(response => {
             let user = response.data.user;
             commit('setAuthUser', user);
+            commit('setLoading', false);
             resolve(user);
           })
           .catch(error => {
+            commit('setLoading', false);
             reject(error);
           });
       });

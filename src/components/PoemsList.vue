@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import PoemsListItem from './PoemsListItem';
 
 export default {
@@ -20,15 +20,10 @@ export default {
   },
 
   created() {
-    this.setLoading(true);
-
-    this.fetchPoems().then(() => {
-      this.setLoading(false);
-    });
+    this.fetchPoems();
   },
 
   methods: {
-    ...mapMutations(['setLoading']),
     ...mapActions(['fetchPoems'])
   }
 };

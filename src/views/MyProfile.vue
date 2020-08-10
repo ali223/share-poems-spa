@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -27,20 +27,11 @@ export default {
   },
 
   created() {
-    this.setLoading(true);
-
-    this.fetchAuthUserProfile()
-      .then(() => {
-        this.setLoading(false);
-      })
-      .catch(() => {
-        this.setLoading(false);
-      });
+    this.fetchAuthUserProfile();
   },
 
   methods: {
-    ...mapActions(['fetchAuthUserProfile']),
-    ...mapMutations(['setLoading'])
+    ...mapActions(['fetchAuthUserProfile'])
   }
 };
 </script>
