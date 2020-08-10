@@ -125,11 +125,12 @@ export default new Vuex.Store({
       });
     },
 
-    registerUser(context, user) {
+    registerUser({ commit }, user) {
       return new Promise((resolve, reject) => {
         AuthService.registerUser(user)
           .then(response => {
-            let user = response.data.data;
+            let user = response.data.user;
+            commit('setAuthUser', user);
             resolve(user);
           })
           .catch(error => {
