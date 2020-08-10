@@ -115,7 +115,8 @@ export default {
         this.loginUser(this.credentials)
           .then(() => {
             this.setLoading(false);
-            this.$router.push({ name: 'Home' });
+            const redirectPath = this.$route.query.redirect || '/';
+            this.$router.push(redirectPath);
             this.addNotification({
               message: 'You have logged in!',
               color: 'success'

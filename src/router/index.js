@@ -52,7 +52,12 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const loggedIn = localStorage.getItem('authUser');
     if (!loggedIn) {
-      return next({ name: 'UserLogin' });
+      return next({
+        name: 'UserLogin',
+        query: {
+          redirect: to.fullPath
+        }
+      });
     }
   }
 
