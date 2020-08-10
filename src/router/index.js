@@ -5,6 +5,7 @@ import PoemShow from '@/views/PoemShow.vue';
 import UserRegister from '@/views/UserRegister.vue';
 import UserLogin from '@/views/UserLogin.vue';
 import MyProfile from '@/views/MyProfile.vue';
+import NotFound from '@/views/NotFound.vue';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,12 @@ const routes = [
     name: 'MyProfile',
     component: MyProfile,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/404',
+    alias: '*',
+    name: 'NotFound',
+    component: NotFound
   }
 ];
 
