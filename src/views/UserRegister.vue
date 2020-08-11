@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import {
   extend,
   ValidationObserver,
@@ -140,7 +140,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['addNotification']),
     ...mapActions(['registerUser']),
 
     register() {
@@ -152,10 +151,6 @@ export default {
         this.registerUser(this.user)
           .then(() => {
             this.$router.push({ name: 'Home' });
-            this.addNotification({
-              message: 'User account created!',
-              color: 'success'
-            });
           })
           .catch(error => {
             if (error.response && error.response.data) {

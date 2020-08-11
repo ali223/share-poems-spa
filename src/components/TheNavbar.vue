@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -62,18 +62,12 @@ export default {
 
   methods: {
     ...mapActions(['logoutUser']),
-    ...mapMutations(['addNotification']),
 
     logout() {
       this.logoutUser().then(() => {
         if (this.$router.currentRoute.name !== 'Home') {
           this.$router.push({ name: 'Home' });
         }
-
-        this.addNotification({
-          message: 'You have logged out!',
-          color: 'success'
-        });
       });
     }
   }

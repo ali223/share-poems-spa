@@ -143,6 +143,10 @@ export default new Vuex.Store({
             let user = response.data.user;
             commit('setAuthUser', user);
             commit('setLoading', false);
+            commit('addNotification', {
+              message: 'User account created and logged in!',
+              color: 'success'
+            });
             resolve(user);
           })
           .catch(error => {
@@ -160,6 +164,10 @@ export default new Vuex.Store({
             let user = response.data.user;
             commit('setAuthUser', user);
             commit('setLoading', false);
+            commit('addNotification', {
+              message: 'You have logged in!',
+              color: 'success'
+            });
             resolve(user);
           })
           .catch(error => {
@@ -172,6 +180,10 @@ export default new Vuex.Store({
     logoutUser({ commit }) {
       return new Promise(resolve => {
         commit('removeAuthUser');
+        commit('addNotification', {
+          message: 'You have logged out!',
+          color: 'success'
+        });
         resolve();
       });
     }

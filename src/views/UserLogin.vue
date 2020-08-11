@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import {
   extend,
   ValidationObserver,
@@ -101,7 +101,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['addNotification']),
     ...mapActions(['loginUser']),
 
     login() {
@@ -114,10 +113,6 @@ export default {
           .then(() => {
             const redirectPath = this.$route.query.redirect || '/';
             this.$router.push(redirectPath);
-            this.addNotification({
-              message: 'You have logged in!',
-              color: 'success'
-            });
           })
           .catch(error => {
             if (error.response && error.response.data) {
