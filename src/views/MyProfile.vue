@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="my-profile">
     <v-container class="my-5">
       <v-card
         class="text-xs-center ma-3 rounded mx-auto"

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="user-login">
     <v-container class="my-5">
       <v-row>
         <v-col cols="6" offset="3">

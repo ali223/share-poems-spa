@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="poem-show">
     <v-container class="my-5">
       <v-card
         class="text-xs-center ma-3 rounded d-flex justify-space-between flex-column"
