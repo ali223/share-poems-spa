@@ -60,7 +60,7 @@ export default {
             commit('setAuthUser', user);
             commit('setLoading', false, { root: true });
             commit(
-              'addNotification',
+              'notification/addNotification',
               {
                 message: 'User account created and logged in!',
                 color: 'success'
@@ -85,7 +85,7 @@ export default {
             commit('setAuthUser', user);
             commit('setLoading', false, { root: true });
             commit(
-              'addNotification',
+              'notification/addNotification',
               {
                 message: 'You have logged in!',
                 color: 'success'
@@ -105,7 +105,7 @@ export default {
       return new Promise(resolve => {
         commit('removeAuthUser');
         commit(
-          'addNotification',
+          'notification/addNotification',
           {
             message: 'You have logged out!',
             color: 'success'

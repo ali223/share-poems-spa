@@ -39,7 +39,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['removeNotification'])
+    ...mapMutations('notification', ['removeNotification'])
   }
 };
 </script>
