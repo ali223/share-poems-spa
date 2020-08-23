@@ -36,16 +36,16 @@ export default {
   actions: {
     fetchAuthUserProfile({ commit }) {
       return new Promise((resolve, reject) => {
-        commit('setLoading', true, { root: true });
+        commit('loading/setLoading', true, { root: true });
         AuthService.getMyProfile()
           .then(response => {
             let userProfile = response.data.data;
             commit('setAuthUserProfile', userProfile);
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             resolve(userProfile);
           })
           .catch(error => {
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             reject(error);
           });
       });
@@ -53,12 +53,12 @@ export default {
 
     registerUser({ commit }, user) {
       return new Promise((resolve, reject) => {
-        commit('setLoading', true, { root: true });
+        commit('loading/setLoading', true, { root: true });
         AuthService.registerUser(user)
           .then(response => {
             let user = response.data.user;
             commit('setAuthUser', user);
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             commit(
               'notification/addNotification',
               {
@@ -70,7 +70,7 @@ export default {
             resolve(user);
           })
           .catch(error => {
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             reject(error);
           });
       });
@@ -78,12 +78,12 @@ export default {
 
     loginUser({ commit }, credentials) {
       return new Promise((resolve, reject) => {
-        commit('setLoading', true, { root: true });
+        commit('loading/setLoading', true, { root: true });
         AuthService.loginUser(credentials)
           .then(response => {
             let user = response.data.user;
             commit('setAuthUser', user);
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             commit(
               'notification/addNotification',
               {
@@ -95,7 +95,7 @@ export default {
             resolve(user);
           })
           .catch(error => {
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             reject(error);
           });
       });

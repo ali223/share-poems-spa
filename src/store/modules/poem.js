@@ -27,16 +27,16 @@ export default {
   actions: {
     fetchPoems({ commit }) {
       return new Promise((resolve, reject) => {
-        commit('setLoading', true, { root: true });
+        commit('loading/setLoading', true, { root: true });
         PoemService.getPoems()
           .then(response => {
             let poems = response.data.data;
             commit('setPoems', poems);
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             resolve(poems);
           })
           .catch(error => {
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             reject(error);
           });
       });
@@ -55,17 +55,17 @@ export default {
           return resolve(poem);
         }
 
-        commit('setLoading', true, { root: true });
+        commit('loading/setLoading', true, { root: true });
 
         PoemService.getPoem(id)
           .then(response => {
             let poem = response.data.data;
             commit('setPoem', poem);
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             resolve(poem);
           })
           .catch(error => {
-            commit('setLoading', false, { root: true });
+            commit('loading/setLoading', false, { root: true });
             reject(error);
           });
       });

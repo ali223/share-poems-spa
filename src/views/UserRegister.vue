@@ -136,7 +136,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['loading'])
+    ...mapState('loading', ['loading'])
   },
 
   methods: {
