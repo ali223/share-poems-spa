@@ -56,12 +56,13 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
-    ...mapState(['loading', 'authUser']),
-    ...mapGetters(['isUserLoggedIn'])
+    ...mapState(['loading']),
+    ...mapState('auth', ['authUser']),
+    ...mapGetters('auth', ['isUserLoggedIn'])
   },
 
   methods: {
-    ...mapActions(['logoutUser']),
+    ...mapActions('auth', ['logoutUser']),
 
     logout() {
       this.logoutUser().then(() => {

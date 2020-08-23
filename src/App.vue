@@ -26,14 +26,14 @@ export default {
 
     if (authUserString) {
       const authUser = JSON.parse(authUserString);
-      this.$store.commit('setAuthUser', authUser);
+      this.$store.commit('auth/setAuthUser', authUser);
     }
 
     axios.interceptors.response.use(
       response => response,
       error => {
         if (error.response.status === 401) {
-          this.$store.dispatch('logoutUser').then(() => {
+          this.$store.dispatch('auth/logoutUser').then(() => {
             if (this.$router.currentRoute.name !== 'UserLogin') {
               this.$router.push({ name: 'UserLogin' });
             }

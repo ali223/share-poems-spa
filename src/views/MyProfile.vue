@@ -23,7 +23,7 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
-    ...mapState(['authUserProfile'])
+    ...mapState('auth', ['authUserProfile'])
   },
 
   created() {
@@ -31,7 +31,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchAuthUserProfile'])
+    ...mapActions('auth', ['fetchAuthUserProfile'])
   }
 };
 </script>

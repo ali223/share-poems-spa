@@ -101,7 +101,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['loginUser']),
+    ...mapActions('auth', ['loginUser']),
 
     login() {
       this.$refs.observer.validate().then(result => {

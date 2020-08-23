@@ -140,7 +140,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['registerUser']),
+    ...mapActions('auth', ['registerUser']),
 
     register() {
       this.$refs.observer.validate().then(result => {
