@@ -35,7 +35,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['poem'])
+    ...mapState('poem', ['poem'])
   },
 
   created() {
@@ -43,7 +43,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['fetchPoem'])
+    ...mapActions('poem', ['fetchPoem'])
   }
 };
 </script>

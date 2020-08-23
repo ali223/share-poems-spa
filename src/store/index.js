@@ -1,17 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import PoemService from '@/services/PoemService';
 import AuthService from '@/services/AuthService';
+import poem from './modules/poem';
 
 Vue.use(Vuex);
 
 let nextNotificationId = 1;
 
 export default new Vuex.Store({
+  modules: {
+    poem
+  },
+
   state: {
-    poems: [],
-    poem: {},
     loading: false,
     notifications: [],
     authUser: null,
@@ -19,24 +21,12 @@ export default new Vuex.Store({
   },
 
   getters: {
-    getPoemById: state => id => {
-      return state.poems.find(poem => poem.id === id);
-    },
-
     isUserLoggedIn: state => {
       return !!state.authUser;
     }
   },
 
   mutations: {
-    setPoems(state, poems) {
-      state.poems = poems;
-    },
-
-    setPoem(state, poem) {
-      state.poem = poem;
-    },
-
     setLoading(state, loading) {
       state.loading = loading;
     },
@@ -72,52 +62,6 @@ export default new Vuex.Store({
   },
 
   actions: {
-    fetchPoems({ commit }) {
-      return new Promise((resolve, reject) => {
-        commit('setLoading', true);
-        PoemService.getPoems()
-          .then(response => {
-            let poems = response.data.data;
-            commit('setPoems', poems);
-            commit('setLoading', false);
-            resolve(poems);
-          })
-          .catch(error => {
-            commit('setLoading', false);
-            reject(error);
-          });
-      });
-    },
-
-    fetchPoem({ commit, getters, state }, id) {
-      return new Promise((resolve, reject) => {
-        if (id === state.poem.id) {
-          return resolve(state.poem);
-        }
-
-        let poem = getters.getPoemById(id);
-
-        if (poem) {
-          commit('setPoem', poem);
-          return resolve(poem);
-        }
-
-        commit('setLoading', true);
-
-        PoemService.getPoem(id)
-          .then(response => {
-            let poem = response.data.data;
-            commit('setPoem', poem);
-            commit('setLoading', false);
-            resolve(poem);
-          })
-          .catch(error => {
-            commit('setLoading', false);
-            reject(error);
-          });
-      });
-    },
-
     fetchAuthUserProfile({ commit }) {
       return new Promise((resolve, reject) => {
         commit('setLoading', true);
