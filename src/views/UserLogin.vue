@@ -10,7 +10,7 @@
 
             <v-card-text>
               <ValidationObserver ref="observer">
-                <v-form class="px-5" ref="form">
+                <v-form class="px-5" ref="form" @submit.prevent="login">
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="Email"
@@ -44,8 +44,8 @@
                   <v-btn
                     text
                     class="success mx-0 mt-3"
-                    @click="login"
                     :loading="loading"
+                    type="submit"
                   >
                     Login
                   </v-btn>
