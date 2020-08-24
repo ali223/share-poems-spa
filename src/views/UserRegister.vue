@@ -10,7 +10,7 @@
 
             <v-card-text>
               <ValidationObserver ref="observer">
-                <v-form class="px-5" ref="form">
+                <v-form class="px-5" ref="form" @submit.prevent="register">
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="Name"
@@ -71,8 +71,8 @@
                   <v-btn
                     text
                     class="success mx-0 mt-3"
-                    @click="register"
                     :loading="loading"
+                    type="submit"
                   >
                     Register
                   </v-btn>
