@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
 import PoemsListItem from './PoemsListItem';
 
 export default {
@@ -15,16 +14,11 @@ export default {
     PoemsListItem
   },
 
-  computed: {
-    ...mapState('poem', ['poems'])
-  },
-
-  created() {
-    this.fetchPoems();
-  },
-
-  methods: {
-    ...mapActions('poem', ['fetchPoems'])
+  props: {
+    poems: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>
